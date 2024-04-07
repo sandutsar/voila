@@ -7,5 +7,7 @@ node_modules
 build
 notebooks/
 .vscode/
+.pytest_cache
+share/
 
 ui-tests/playwright-report

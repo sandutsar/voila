@@ -1,4 +1,3 @@
-lint-staged.config.js
 .eslintrc.js
 
 node_modules
@@ -15,6 +14,7 @@ node_modules
 coverage
 *.map.js
 *.bundle.js
+*.voila.js
 
 # jetbrains IDE stuff
 .idea/

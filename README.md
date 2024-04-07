@@ -1,7 +1,8 @@
-# ![voila](docs/source/voila-logo.svg)
+# ![voila](docs/voila-logo.svg)
 
 [![Documentation](http://readthedocs.org/projects/voila/badge/?version=latest)](https://voila.readthedocs.io/en/latest/?badge=latest)
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/voila-dashboards/voila/stable?urlpath=voila%2Ftree%2Fnotebooks)
+[![Discourse](https://img.shields.io/badge/help_forum-discourse-blue.svg)](https://discourse.jupyter.org)
 [![Join the Gitter Chat](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/QuantStack/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 Rendering of live Jupyter notebooks with interactive widgets.
@@ -16,7 +17,7 @@ callbacks to changes in Jupyter interactive widgets.
 
 - By default, Voilà disallows execute requests from the front-end, preventing
   execution of arbitrary code.
-- By default, Voilà runs with the `strip_source` option, which strips out the
+- By default, Voilà runs with the `strip_sources` option, which strips out the
   input cells from the rendered notebook.
 
 ## Installation
@@ -57,7 +58,7 @@ To serve a directory of jupyter notebooks, run `voila` with no argument.
 For example, to render the example notebook `bqplot.ipynb` from this repository with Voilà, you can first update your current environment with the requirements of this notebook (in this case in a [conda environment](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html) and render the notebook with
 
 ```
-mamba env update -f environment.yml
+mamba env update -f .binder/environment.yml
 cd notebooks/
 voila bqplot.ipynb
 ```

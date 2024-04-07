@@ -59,22 +59,26 @@ export class VoilaPreview extends DocumentWidget<IFrame, INotebookModel> {
 
     window.onmessage = (event: any) => {
       //console.log("EVENT: ", event);
-
-      switch (event.data?.level) {
+      const level = event?.data?.level;
+      const msg = event?.data?.msg;
+      if (!level || !msg) {
+        return;
+      }
+      switch (level) {
         case 'debug':
-          console.debug(...event.data?.msg);
+          console.debug(msg);
           break;
 
         case 'info':
-          console.info(...event.data?.msg);
+          console.info(msg);
           break;
 
         case 'warn':
-          console.warn(...event.data?.msg);
+          console.warn(msg);
           break;
 
         case 'error':
-          console.error(...event.data?.msg);
+          console.error(msg);
           break;
 
         default:
@@ -97,7 +101,12 @@ export class VoilaPreview extends DocumentWidget<IFrame, INotebookModel> {
     const reloadButton = new ToolbarButton({
       icon: refreshIcon,
       tooltip: 'Reload Preview',
-      onClick: () => {
+      onClick: async () => {
+        try {
+          await context.save();
+        } catch (e) {
+          console.error(e);
+        }
         this.reload();
       }
     });
@@ -105,7 +114,6 @@ export class VoilaPreview extends DocumentWidget<IFrame, INotebookModel> {
     const renderOnSaveCheckbox = ReactWidget.create(
       <label className="jp-VoilaPreview-renderOnSave">
         <input
-          style={{ verticalAlign: 'middle' }}
           name="renderOnSave"
           type="checkbox"
           defaultChecked={renderOnSave}
@@ -146,8 +154,8 @@ export class VoilaPreview extends DocumentWidget<IFrame, INotebookModel> {
    * Reload the preview.
    */
   reload(): void {
-    const iframe = this.content.node.querySelector('iframe')!;
-    if (iframe.contentWindow) {
+    const iframe = this.content.node.querySelector('iframe');
+    if (iframe && iframe.contentWindow) {
       iframe.contentWindow.location.reload();
     }
   }
